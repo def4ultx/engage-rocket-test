@@ -9,11 +9,13 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
+
+	"engage-rocket-test/handler"
 )
 
 func main() {
 	r := mux.NewRouter()
-	r.HandleFunc("/score", CalculateScoreHandler)
+	r.HandleFunc("/score", handler.CalculateScoreHandler)
 	srv := &http.Server{
 		Addr:         "0.0.0.0:8080",
 		WriteTimeout: time.Second * 15,
