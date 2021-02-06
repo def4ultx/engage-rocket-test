@@ -92,3 +92,35 @@ func TestCalculateScoreHandler_InvalidRequest(t *testing.T) {
 	assert.NoError(t, err)
 	assert.JSONEq(t, expected, string(actual))
 }
+
+func TestCalculateScoreHandler_ValidationError(t *testing.T) {
+
+	h := http.HandlerFunc(CalculateScoreHandler)
+	r := httptest.NewRecorder()
+
+	body := `{}`
+	req := httptest.NewRequest(http.MethodPost, "/score", strings.NewReader(body))
+	req.Header.Set("Content-type", "application/json")
+
+	h.ServeHTTP(r, req)
+
+	result := r.Result()
+	assert.Equal(t, http.StatusBadRequest, result.StatusCode)
+
+	expected := `
+	{
+		"success": false,
+		"data": {},
+		"errors": [
+			"empty managers score",
+			"empty team score",
+			"empty others score"
+		]
+	}
+	`
+	actual, err := ioutil.ReadAll(result.Body)
+	_ = result.Body.Close()
+
+	assert.NoError(t, err)
+	assert.JSONEq(t, expected, string(actual))
+}

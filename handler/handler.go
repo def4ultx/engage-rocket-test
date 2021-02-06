@@ -24,9 +24,16 @@ type CalculatedScoreResponse struct {
 
 func CalculateScoreHandler(w http.ResponseWriter, r *http.Request) {
 	var req Request
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	err := json.NewDecoder(r.Body).Decode(&req)
+	if err != nil {
 		msg := []error{errors.New("cannot decode request body")}
 		writeErrorResponse(w, msg)
+		return
+	}
+
+	errs, ok := req.Scores.Validate().(*domain.ScoreValidationError)
+	if ok && len(errs.Errors) != 0 {
+		writeErrorResponse(w, errs.Errors)
 		return
 	}
 
