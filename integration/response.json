@@ -1,0 +1,11 @@
+{
+    "success": true,
+    "data": {
+        "scores": {
+            "manager": 3,
+            "team": 2.75,
+            "others": 0
+        }
+    },
+    "errors": []
+}
