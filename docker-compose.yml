@@ -1,0 +1,7 @@
+version: "3"
+
+services:
+  score-server:
+    image: engagerocket/score-server:latest
+    ports:
+      - 8080:8080
