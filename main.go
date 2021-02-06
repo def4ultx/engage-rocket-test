@@ -13,6 +13,7 @@ import (
 
 func main() {
 	r := mux.NewRouter()
+	r.HandleFunc("/score", CalculateScoreHandler)
 	srv := &http.Server{
 		Addr:         "0.0.0.0:8080",
 		WriteTimeout: time.Second * 15,
