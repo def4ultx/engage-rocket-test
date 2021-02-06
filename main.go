@@ -14,6 +14,8 @@ import (
 )
 
 func main() {
+	log.Println("starting server...")
+
 	r := mux.NewRouter()
 	r.HandleFunc("/score", handler.CalculateScoreHandler).Methods(http.MethodPost)
 	srv := &http.Server{
@@ -37,6 +39,7 @@ func main() {
 	wait := time.Second * 15
 	ctx, cancel := context.WithTimeout(context.Background(), wait)
 	defer cancel()
-	srv.Shutdown(ctx)
-	log.Println("shutting down")
+
+	_ = srv.Shutdown(ctx)
+	log.Println("shutting down...")
 }

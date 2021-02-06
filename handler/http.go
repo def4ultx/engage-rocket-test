@@ -37,5 +37,5 @@ func writeErrorResponse(w http.ResponseWriter, errors []error) {
 func writeResponse(w http.ResponseWriter, code int, data interface{}) {
 	w.Header().Add("Content-type", "application/json")
 	w.WriteHeader(code)
-	json.NewEncoder(w).Encode(data)
+	_ = json.NewEncoder(w).Encode(data)
 }
