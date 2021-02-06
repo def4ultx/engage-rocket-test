@@ -1,4 +1,4 @@
-package main
+package domain
 
 type Score struct {
 	UserId int     `json:"userId"`

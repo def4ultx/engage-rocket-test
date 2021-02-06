@@ -1,4 +1,4 @@
-package main
+package domain
 
 func AverageScore(scores []Score, minSize int) float64 {
 	if len(scores) == 0 {
