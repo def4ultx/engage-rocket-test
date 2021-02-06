@@ -15,7 +15,7 @@ import (
 
 func main() {
 	r := mux.NewRouter()
-	r.HandleFunc("/score", handler.CalculateScoreHandler)
+	r.HandleFunc("/score", handler.CalculateScoreHandler).Methods(http.MethodPost)
 	srv := &http.Server{
 		Addr:         "0.0.0.0:8080",
 		WriteTimeout: time.Second * 15,
