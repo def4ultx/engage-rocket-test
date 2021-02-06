@@ -5,12 +5,14 @@ type Score struct {
 	Score  float64 `json:"score"`
 }
 
+type Scores struct {
+	Manager []Score `json:"managers"`
+	Team    []Score `json:"team"`
+	Others  []Score `json:"others"`
+}
+
 type Request struct {
-	Scores struct {
-		Manager []Score `json:"managers"`
-		Team    []Score `json:"team"`
-		Others  []Score `json:"others"`
-	} `json:"scores"`
+	Scores Scores `json:"scores"`
 }
 
 type CalculatedScore struct {
