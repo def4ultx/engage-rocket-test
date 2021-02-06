@@ -25,6 +25,12 @@ func TestAverageScore(t *testing.T) {
 			minSize: 1,
 		},
 		{
+			name:    "empty score and -1 minSize, return 0",
+			want:    0.0,
+			scores:  []Score{},
+			minSize: -1,
+		},
+		{
 			name: "size of score less than minSize, return 0",
 			want: 0.0,
 			scores: []Score{
