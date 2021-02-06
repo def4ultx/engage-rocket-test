@@ -1,6 +1,8 @@
 package handler
 
 import (
+	"encoding/json"
+	"errors"
 	"net/http"
 
 	"engage-rocket-test/domain"
@@ -16,9 +18,30 @@ type Request struct {
 	Scores domain.Scores `json:"scores"`
 }
 
-type ResponseData struct {
+type CalculatedScoreResponse struct {
 	Scores CalculatedScore `json:"scores"`
 }
 
 func CalculateScoreHandler(w http.ResponseWriter, r *http.Request) {
+	var req Request
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		msg := []error{errors.New("cannot decode request body")}
+		writeErrorResponse(w, msg)
+		return
+	}
+
+	minManagerSize, minTeamSize, minOtherSize := 0, 3, 3
+	var (
+		managerScore = domain.AverageScore(req.Scores.Manager, minManagerSize)
+		teamScore    = domain.AverageScore(req.Scores.Team, minTeamSize)
+		othersScore  = domain.AverageScore(req.Scores.Others, minOtherSize)
+	)
+
+	scores := CalculatedScore{
+		Manager: &managerScore,
+		Team:    &teamScore,
+		Others:  &othersScore,
+	}
+	body := CalculatedScoreResponse{scores}
+	writeSuccessResponse(w, &body)
 }
