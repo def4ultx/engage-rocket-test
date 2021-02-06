@@ -1,7 +1,7 @@
 package main
 
 func AverageScore(scores []Score, minSize int) float64 {
-	if minSize > len(scores) {
+	if minSize >= len(scores) {
 		return 0
 	}
 

@@ -33,6 +33,16 @@ func TestAverageScore(t *testing.T) {
 			minSize: 2,
 		},
 		{
+			name: "size of score equal minSize, return 0",
+			want: 0,
+			scores: []Score{
+				{0, 1},
+				{0, 5},
+				{0, 3},
+			},
+			minSize: 3,
+		},
+		{
 			name: "size of score more than minSize, return 2.75",
 			want: 2.75,
 			scores: []Score{
@@ -41,7 +51,7 @@ func TestAverageScore(t *testing.T) {
 				{0, 3},
 				{0, 2},
 			},
-			minSize: 0,
+			minSize: 3,
 		},
 	}
 	for _, tt := range tests {
