@@ -2,3 +2,4 @@ Makefile
 *.md
 Dockerfile
 docker-compose.yml
+vendor/
