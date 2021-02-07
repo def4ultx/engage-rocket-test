@@ -11,7 +11,7 @@ build:
 
 .PHONY: test
 test:
-	go test -mod vendor -race -cover -coverprofile=coverage.txt -covermode=atomic ./...
+	go test -mod vendor -race -count=1 ./...
 
 .PHONY: integration
 integration:
